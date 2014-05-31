@@ -14,18 +14,23 @@ Pomodoros = new Meteor.Collection("pomodoros");
 //Pomodoros = new Meteor.Collection("pomodoros", {transform: fixDate});
 
 
-// allow dharma
-var dharmaId = Meteor.users.findOne({username:'dharma'})._id;
-
-
-var allowed = [dharmaId];
 
 
 Pomodoros.allow({
 	insert	: function(userId, doc) {
+
+
+// allow dharma
+		var dharmaId = Meteor.users.findOne({username:'dharma'})._id;
+		var bobby2 = Meteor.users.findOne({username:'bobby2'})._id;
+
+		var allowed = [dharmaId, bobby2];
+
+
+
 		console.log("dharmaId: " + dharmaId);
 
-		if( userId === allowed[0]) {
+		if( userId === allowed[0] || userId === allowed[1]) {
 			return true;
 		}
 	},
